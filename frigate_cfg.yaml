@@ -30,13 +30,13 @@ cameras:
   catcam:
     ffmpeg:
       inputs:
+        # apparently the http endpoint doesn't work with my cameras.
         - path: rtsp://{FRIGATE_CAM_UN}:{FRIGATE_CAM_PW}@192.168.9.53:554/h264Preview_01_sub
           roles:
             - detect
         - path: rtsp://{FRIGATE_CAM_UN}:{FRIGATE_CAM_PW}@192.168.9.53:554/h264Preview_01_main
           roles:
             - clips
-            - rtmp
     width: 640
     height: 480
     fps: 7
@@ -54,9 +54,12 @@ cameras:
       post_capture: 15
     record:
       enabled: False
-    
     rtmp:
+      enabled: False
+
+    snapshots:
       enabled: True
+      bounding_box: True
 
   frontdoor:
     ffmpeg:
@@ -67,7 +70,6 @@ cameras:
         - path: rtsp://{FRIGATE_CAM_UN}:{FRIGATE_CAM_PW}@192.168.9.51:554/h264Preview_01_main
           roles:
             - clips
-            - rtmp
     width: 640
     height: 480
     fps: 7
@@ -99,7 +101,10 @@ cameras:
     record:
       enabled: False
     rtmp:
+      enabled: False
+    snapshots:
       enabled: True
+      bounding_box: True
   
   backyard:
     ffmpeg:
@@ -110,7 +115,6 @@ cameras:
         - path: rtsp://{FRIGATE_CAM_UN}:{FRIGATE_CAM_PW}@192.168.9.52:554/h264Preview_01_main 
           roles:
             - clips
-            - rtmp
     width: 640
     height: 480
     fps: 7
@@ -129,7 +133,14 @@ cameras:
     record:
       enabled: False
     rtmp:
+      enabled: False
+    snapshots:
       enabled: True
+      bounding_box: True
+
+snapshots:
+  retain:
+    default: 14
 
 clips:
   retain:
