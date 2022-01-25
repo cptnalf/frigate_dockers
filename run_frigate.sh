@@ -23,5 +23,4 @@ sudo docker run -d \
   -e PUID=1000 -e PGID=44 \
   -p 5002:5000 \
   -p 1935:1945 \
-  blakeblackshear/frigate:stable-aarch64 \
-  /config/frigate.sh
+  cptnalf/frigate:0.9.4
