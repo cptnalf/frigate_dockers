@@ -1,0 +1,19 @@
+FROM cptnalf/jetson-ffmpeg-frigate:4.3.2 as src
+
+FROM cptnalf/ubuntu-jetson:20.04 as base
+
+ENV NVIDIA_DRIVER_CAPABILITIES all
+ENV NVIDIA_VISIBLE_DEVICES all
+
+COPY --from=src /usr/local/ /usr/local/
+
+RUN echo "/usr/lib/aarch64-linux-gnu/tegra" >> /etc/ld.so.conf.d/nvidia-tegra.conf && \
+    ldconfig 
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y libgomp1
+
+# cptnalf/jetson-ffmpeg-focal:4.3.2
+# test cmd:
+# ffmpeg -i "http://192.168.9.52/flv?port1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAM_UN}&password={FRIGATE_CAM_PW}" -c:v h264_nvmpi -f null -
+# 
