@@ -29,7 +29,7 @@ ffmpeg:
 #    - "1"
 
   output_args:
-    clips: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c copy
+    record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c copy
 
 rtmp:
   enabled: False
@@ -72,9 +72,10 @@ cameras:
         - path: http://192.168.9.53/flv?port1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_CAM_UN}&password={FRIGATE_CAM_PW}
           roles:
             - detect
-    width: 640
-    height: 480
-    fps: 7
+    detect:
+      width: 640
+      height: 480
+      fps: 7
 
 
     motion:
@@ -90,13 +91,14 @@ cameras:
         - path: http://192.168.9.51/flv?port1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_CAM_UN}&password={FRIGATE_CAM_PW}
           roles:
             - detect
-    width: 640
-    height: 480
-    fps: 7
+    detect:
+      width: 640
+      height: 480
+      fps: 7
 
     motion:
       mask:
-        - 410,444,410,470,221,470,221,444
+        - 450,444,450,470,182,470,182,444
     objects:
       track:
         - car
@@ -120,10 +122,11 @@ cameras:
         - path: http://192.168.9.52/flv?port1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_CAM_UN}&password={FRIGATE_CAM_PW}
           roles:
             - detect
-    width: 640
-    height: 480
-    fps: 7
+    detect:
+      width: 640
+      height: 480
+      fps: 7
 
     motion:
       mask:
-        - 410,444,410,470,221,470,221,444
+        - 450,444,450,470,184,470,184,444
