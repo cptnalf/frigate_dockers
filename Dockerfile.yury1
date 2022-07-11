@@ -1,0 +1,18 @@
+#yury1sannikov/
+FROM frigate.l4t:0.11 AS base
+
+LABEL maintainer "blakeb@blakeshome.com"
+LABEL maintainer "captainalf@gmail.com"
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# add the local-user
+RUN \
+  useradd --uid 911 --user-group --create-home abc
+
+# copy over the edited startup files.
+COPY rootfs/ /
+
+ENTRYPOINT [ "/init" ]
+CMD ["/run-frigate" ]
+# tag cptnalf/frigate-jetson:0.10.0
