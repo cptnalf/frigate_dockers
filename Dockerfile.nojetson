@@ -13,4 +13,5 @@ RUN \
 COPY rootfs/ /
 
 ENTRYPOINT [ "/init" ]
+CMD ["/run-frigate"]
 # tag cptnalf/frigate-jetson:0.10.0
